@@ -77,12 +77,24 @@ function matchesScore ($value)	{
 // 3. e che age sia un numero.
 // Se tutto è ok stampare “Accesso riuscito”, altrimenti “Accesso negato”
 
+function validationUser () {
+	// Valido i dati
+	$name = isset($_GET['name']) && strlen($_GET['name']) > 3 ? $_GET['name'] : false;
+	$mail = isset($_GET['mail']) && (strpos($_GET['mail'], '.') !== false && strpos($_GET['mail'], '@') !== false) ? $_GET['mail'] : false;
+	$age = isset($_GET['age']) && is_numeric($_GET['age']) ? $_GET['age'] : false;
 
-$name = isset($_GET['name']) ? strlen($_GET['name']) > 3 ? $_GET['name'] : 'troppo corto' : 'da inserire';
-$mail = isset($_GET['mail']) ? (strpos($_GET['mail'], '.') !== false && strpos($_GET['mail'], '@') !== false) ? $_GET['mail'] : 'email non valida' : 'da inserire';
-$age = isset($_GET['age']) ? is_numeric($_GET['age']) ? $_GET['age'] : 'non un numero' : 'da inserire';
+	// Se validi Stampo un mex di accesso e i dati
+	if ($name && $mail && $age) {
+		$dati =  'Accesso riuscito' .'<br>' .'<br>' .'name: ' .$name .' ' .'<br>' .'mail: ' .$mail .'<br>'  .'age: ' .$age;
+	} else {
+		// altrimenti
+		$dati = 'Accesso Negato';
+	}
 
-$dati = 'name: ' .$name .' ' .'<br>' .'mail: ' .$mail .'<br>'  .'age: ' .$age;
+	echo $dati;
+}
+
+
 
 
 ?>
@@ -97,13 +109,14 @@ $dati = 'name: ' .$name .' ' .'<br>' .'mail: ' .$mail .'<br>'  .'age: ' .$age;
 		<p><strong>#Snack 1</strong></p>
 		<h1> Risulatai 2° giornata LBA</h1>
 		<?php
+
 		matchesScore($matches);
 		?>
 		<p><strong>#Snack 2</strong></p>
 		<h4>Utente: </h4>
 		<?php
 
-		echo $dati;
+		validationUser();
 
 		 ?>
 	</body>
