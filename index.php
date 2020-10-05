@@ -1,13 +1,13 @@
-<!--
-#	PHP Snack 1:
-Creiamo un array 'matches' contenente altri array i quali rappresentano delle partite di basket di un’ipotetica tappa del calendario.
-Ogni array della partita avrà una squadra di casa e una squadra ospite, punti fatti dalla squadra di casa e punti fatti dalla squadra ospite.
-Stampiamo a schermo tutte le partite con questo schema:
-Olimpia Milano - Cantù | 55-60.
- -->
-
 <?php
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+//Snack 1
+#	PHP Snack 1:
+// Creiamo un array 'matches' contenente altri array i quali rappresentano delle partite di basket di un’ipotetica tappa del calendario.
+// Ogni array della partita avrà una squadra di casa e una squadra ospite, punti fatti dalla squadra di casa e punti fatti dalla squadra ospite.
+// Stampiamo a schermo tutte le partite con questo schema:
+// Olimpia Milano - Cantù | 55-60.
 $matches = [
 	 [
 		'casa' => 'Trento',
@@ -69,6 +69,20 @@ function matchesScore ($value)	{
 			echo '<br>';
 		}
 }
+// Snak 2
+#	PHP Snack 2:
+// Passare come parametri GET name, mail e age e verificare (cercando i metodi che non conosciamo nella documentazione) che:
+// 1. name sia più lungo di 3 caratteri,
+// 2. che mail contenga un punto e una chiocciola
+// 3. e che age sia un numero.
+// Se tutto è ok stampare “Accesso riuscito”, altrimenti “Accesso negato”
+
+
+$name = isset($_GET['name']) ? strlen($_GET['name']) > 3 ? $_GET['name'] : 'troppo corto' : 'da inserire';
+$mail = isset($_GET['mail']) ? (strpos($_GET['mail'], '.') !== false && strpos($_GET['mail'], '@') !== false) ? $_GET['mail'] : 'email non valida' : 'da inserire';
+$age = isset($_GET['age']) ? is_numeric($_GET['age']) ? $_GET['age'] : 'non un numero' : 'da inserire';
+
+$dati = 'name: ' .$name .' ' .'<br>' .'mail: ' .$mail .'<br>'  .'age: ' .$age;
 
 
 ?>
@@ -80,11 +94,17 @@ function matchesScore ($value)	{
 		<title>PHP Snack 1</title>
 	</head>
 	<body>
+		<p><strong>#Snack 1</strong></p>
 		<h1> Risulatai 2° giornata LBA</h1>
 		<?php
-
 		matchesScore($matches);
-
 		?>
+		<p><strong>#Snack 2</strong></p>
+		<h4>Utente: </h4>
+		<?php
+
+		echo $dati;
+
+		 ?>
 	</body>
 </html>
